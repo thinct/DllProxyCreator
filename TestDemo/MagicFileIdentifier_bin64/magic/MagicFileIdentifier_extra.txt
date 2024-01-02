@@ -1,0 +1,176 @@
+# extra types currently not inside default magic master branch
+
+
+##################################################################################################################
+##################################################################################################################
+#    DIB / BMP
+##################################################################################################################
+##################################################################################################################
+0	string/b	\x42\x4D	Bitmap image
+!:mime	image/bmp
+!:ext	bmp/dib
+
+
+##################################################################################################################
+##################################################################################################################
+#    Inno Setup data
+##################################################################################################################
+##################################################################################################################
+0	string/b	\x7A\x6C\x62\x1A 	Inno Setup data
+
+##################################################################################################################
+##################################################################################################################
+#    Macromedia Director
+##################################################################################################################
+##################################################################################################################
+
+# https://filext.com/file-extension/DXR
+# Macromedia Director (Protected Movie File) by Macromedia
+# Macromedia Director is an authoring tool for professionals. 
+# Director combines broad media support and an extendible development environment to 
+# deliver content and applications for CDs, DVDs, kiosks, and the Internet. 
+# The initial file formats for the Mac and PC have different values. 
+# The Mime types used with this association are: application/x-director, application/vnd.dxr. 
+# The identifying characters used for this association are - 
+# PC Version:, Hex: 52 49 46 58 00, ASCII: RIFX, Mac Version:, Hex: 58 46 49 52, ASCII: XFIR 
+# Program ID is Director.ProtectedMovie.5
+
+0	string/b	RIFX	Macromedia Director (Protected Movie File)
+!:mime	application/x-director
+!:ext	dxr
+
+0	string/b	XFIR	Macromedia Director (Protected Movie File)
+!:mime	application/x-director
+!:ext	dxr
+
+##################################################################################################################
+##################################################################################################################
+#    MSVCRT
+##################################################################################################################
+##################################################################################################################
+
+##################################################################################################################
+#    obj format
+##################################################################################################################
+
+# http://www.geoffchappell.com/studies/msvc/link/dump/infiles/obj.htm
+# https://stackoverflow.com/questions/32639518/how-to-determine-the-major-compiler-version-from-obj-files-compiled-with-gl
+
+0	string/b	\x00\x00\xFF\xFF
+>4	leshort		0	Ms Vs Import Object
+!:mime	application/x-ms-obj
+!:ext	obj
+# WinNT.h ANON_OBJECT_HEADER
+>4	leshort		>0	Ms Vs anon obj v%u
+>>6	uleshort	0x0184	Alpha AXP 32
+>>6	uleshort	0x0284	Alpha AXP 64
+>>6	uleshort	0x01D3	Matsushita AM33 
+>>6	uleshort	0x014C	Intel 386
+>>6	uleshort	0x0200	Intel ia64
+>>6	uleshort	0x8664	Intel amd64
+# ARM COFF (./arm)
+>>6	uleshort	0x01c0	ARM little endian
+>>6	uleshort	0xaa64	ARM64 little endian
+>>6	uleshort	0x01c2	ARM Thumb
+>>6	uleshort	0x01c4	ARM Thumb-2 little endian
+# other
+>>6	uleshort	0x0ebc	EFI byte code
+>>6	uleshort	0x6232	LoongArch 32-bit processor family
+>>6	uleshort	0x6264	LoongArch 64-bit processor family
+>>6	uleshort	0x9041	Mitsubishi M32R little endian
+>>6	uleshort	0x0266	MIPS16
+>>6	uleshort	0x0366	MIPS with FPU
+>>6	uleshort	0x0466	MIPS16 with FPU
+>>6	uleshort	0x01f0	Power PC little endian
+>>6	uleshort	0x01f1	Power PC with floating point support
+>>6	uleshort	0x0166	MIPS little endian
+>>6	uleshort	0x5032	RISC-V 32-bit address space
+>>6	uleshort	0x5064	RISC-V 64-bit address space
+>>6	uleshort	0x5128	RISC-V 128-bit address space
+>>6	uleshort	0x01a2	Hitachi SH3
+>>6	uleshort	0x01a3	Hitachi SH3 DSP
+>>6	uleshort	0x01a6	Hitachi SH4
+>>6	uleshort	0x01a8	Hitachi SH5
+>>6	uleshort	0x0169	MIPS little-endian WCE v2
+>>8	ledate		>0		\b, created %s
+#>>12 CLSID
+>>28	ulelong		>0		\b, size of data %u
+!:mime	application/x-ms-obj
+!:ext	obj
+
+# WinNT.h ANON_OBJECT_HEADER_V2
+>4	leshort		>1
+>>32	ulelong	1	\b, with CLR metadata
+>>>36	ulelong	>0	(Size %u
+>>>40	ulelong	>0	, Offset %u)
+!:mime	application/x-ms-obj
+!:ext	obj
+
+
+
+##################################################################################################################
+#    OLE Type Library
+##################################################################################################################
+
+# https://filext.com/file-extension/TLB
+#
+# OLE Type Library (Type 1)
+# The identifying characters used for this association are - Hex: 53 4C 54 47, ASCII: SLTG
+#
+# OLE Type Library (Type 2)
+# The identifying characters used for this association are - Hex: 4D 53 46 54 02 00 01 00, ASCII: MSFT 
+# Visual C++ (Type Library) by Microsoft Corporation
+#
+# SPSS (Type Library) by SPSS, Inc.
+# Data mining software that generates decision-making information using statistics. 
+# Also allows you to understand and present results with tabular and graphical output, 
+# and share results with others using a variety of reporting methods, including secure Web publishing. 
+# The identifying characters used for this association are - 
+# Hex: 4D 53 46 54 02 00 01 00 00 00 00 00 09 04 00 00 09 04 00 00 51 00 00 00 07 00, ASCII: MSFT Q 
+
+0	string/b	SLTG	OLE Type Library (Type 1)
+!:mime	application/x-type-library-OLE-1
+!:ext	tlb
+
+
+0	string/b	MSFT\x02\x00\x01\x00	OLE Type Library (Type 2)
+!:mime	application/x-type-library-OLE-2
+!:ext	tlb
+
+# SPSS Type Library (try to avoid bad OLE Type Library detection)
+0	string/b	MSFT\x02\x00\x01\x00\x00\x00\x00\x00\x09\x04\x00\x00\x09\x04\x00\x00\x51\x00\x00\x00\x07\x00	SPSS (Type Library) by SPSS, Inc.
+!:mime	application/x-type-library-SPSS
+!:ext	tlb
+
+
+##################################################################################################################
+#    Microsoft Linker Database
+##################################################################################################################
+
+0	string/b	Microsoft\ Linker\ Database\n	Microsoft Linker Database
+!:mime	application/x-ms-vs.linker.db
+!:ext	ilk
+
+##################################################################################################################
+#    Microsoft Visual Studio Solution File
+##################################################################################################################
+
+# according to sln versions, first line can be empty (only \r\n) or not. 
+# File encoding can be specified, so string/t is required
+
+0	regex/1l	\^Microsoft\ Visual\ Studio\ Solution\ File,\ Format\ Version\ [.0-9]{3,5}	%s
+!:mime	text/x-ms-vs.solution
+!:ext	sln
+
+0	string/t	\r\n
+>&0	regex/1l	\^Microsoft\ Visual\ Studio\ Solution\ File,\ Format\ Version\ [.0-9]{3,5}	%s
+!:mime	text/x-ms-vs.solution
+!:ext	sln
+
+##################################################################################################################
+#    Microsoft resource script
+##################################################################################################################
+
+0	string/t	\x2F\x2F\ Microsoft\ Visual\ C++\ generated\ resource\ script.	Microsoft Visual C++ resource
+!:mime	text/x-ms-vs.resource
+!:ext	rc
