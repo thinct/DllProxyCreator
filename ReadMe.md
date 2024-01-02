@@ -9,6 +9,7 @@ Project content source files are:
 
 
 ## Have to do an explicit function address resolving
+```c++
 typedef void* (__cdecl *pfmagic_open)(int i);
 C_DLL_EXPORT void* __cdecl magic_open(int i)
 {
@@ -25,4 +26,5 @@ C_DLL_EXPORT void* __cdecl magic_open(int i)
         return pmagic_open(i);
     else
         return NULL;
-} 
+}
+```
